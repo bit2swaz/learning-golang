@@ -1,4 +1,4 @@
-package main
+package poker
 
 import (
 	"encoding/json"
@@ -7,17 +7,20 @@ import (
 	"strings"
 )
 
+// PlayerStore stores score information about players.
 type PlayerStore interface {
 	GetPlayerScore(name string) int
 	RecordWin(name string)
 	GetLeague() League
 }
 
+// Player stores a name with a number of wins.
 type Player struct {
 	Name string
 	Wins int
 }
 
+// PlayerServer is a HTTP interface for player information.
 type PlayerServer struct {
 	store PlayerStore
 	http.Handler
@@ -25,6 +28,7 @@ type PlayerServer struct {
 
 const jsonContentType = "application/json"
 
+// NewPlayerServer creates a PlayerServer with routing configured.
 func NewPlayerServer(store PlayerStore) *PlayerServer {
 	p := new(PlayerServer)
 
