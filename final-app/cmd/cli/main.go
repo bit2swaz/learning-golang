@@ -5,7 +5,7 @@ import (
 	"log"
 	"os"
 
-	poker "github.com/quii/learn-go-with-tests/time/v3"
+	poker "github.com/quii/learn-go-with-tests/websockets/v2"
 )
 
 const dbFileName = "game.db.json"
@@ -18,7 +18,7 @@ func main() {
 	}
 	defer close()
 
-	game := poker.NewTexasHoldem(poker.BlindAlerterFunc(poker.StdOutAlerter), store)
+	game := poker.NewTexasHoldem(poker.BlindAlerterFunc(poker.Alerter), store)
 	cli := poker.NewCLI(os.Stdin, os.Stdout, game)
 
 	fmt.Println("Let's play poker")

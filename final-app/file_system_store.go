@@ -30,7 +30,7 @@ func NewFileSystemPlayerStore(file *os.File) (*FileSystemPlayerStore, error) {
 	}
 
 	return &FileSystemPlayerStore{
-		database: json.NewEncoder(&tape{file}),
+		database: json.NewEncoder(&Tape{file}),
 		league:   league,
 	}, nil
 }
@@ -73,6 +73,7 @@ func initialisePlayerDBFile(file *os.File) error {
 	return nil
 }
 
+// GetLeague returns the Scores of all the players.
 func (f *FileSystemPlayerStore) GetLeague() League {
 	sort.Slice(f.league, func(i, j int) bool {
 		return f.league[i].Wins > f.league[j].Wins
